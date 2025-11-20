@@ -1,7 +1,16 @@
-<!doctype html><html><head><meta charset="utf-8"><title>{% block title %}Blog{% endblock %}</title></head>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Blog{% endblock %}</title>
+</head>
 <body>
-  <header><h1><a href="{% url 'blog:post_list' %}">Meu Blog</a></h1>
+  <header>
+    <h1><a href="{% url 'blog:post_list' %}">Meu Blog</a></h1>
     <nav><a href="{% url 'blog:post_create' %}">Criar post</a></nav>
+    <hr>
   </header>
   <main>{% block content %}{% endblock %}</main>
-</body></html>
+</body>
+</html>
+
