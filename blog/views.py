@@ -1,12 +1,10 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
 from .forms import PostForm
-from django.contrib.auth.models import User
-from django.utils import timezone
-from django.utils.decorators import method_decorator
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
 
 class PostListView(ListView):
     model = Post
@@ -26,12 +24,10 @@ class PostCreateView(CreateView):
     form_class = PostForm
     template_name = 'blog/post_form.html'
 
-
 class PostUpdateView(UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_form.html'
-
 
 class PostDeleteView(DeleteView):
     model = Post
