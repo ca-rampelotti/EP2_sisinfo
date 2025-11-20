@@ -5,11 +5,19 @@
   <title>{% block title %}Blog{% endblock %}</title>
 </head>
 <body>
-  <header>
-    <h1><a href="{% url 'blog:post_list' %}">Meu Blog</a></h1>
-    <nav><a href="{% url 'blog:post_create' %}">Criar post</a></nav>
-    <hr>
-  </header>
+<header>
+  <h1><a href="{% url 'blog:post_list' %}">Meu Blog</a></h1>
+  <nav>
+    <a href="{% url 'blog:post_create' %}">Criar post</a>
+    {% if request.user.is_authenticated %}
+      | Logado como {{ request.user.username }}
+      | <a href="{% url 'logout' %}?next={% url 'blog:post_list' %}">Sair</a>
+    {% else %}
+      | <a href="{% url 'login' %}?next={{ request.path }}">Entrar</a>
+    {% endif %}
+  </nav>
+  <hr>
+</header>
   <main>{% block content %}{% endblock %}</main>
 </body>
 </html>

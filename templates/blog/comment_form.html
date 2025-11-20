@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Adicionar comentário para "{{ post.title }}"</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <textarea name="text" rows="4" cols="50" placeholder="Digite seu comentário"></textarea>
+    </p>
+    <button type="submit">Enviar</button>
+    <a href="{% url 'blog:post_detail' post.pk %}">Cancelar</a>
+</form>
+{% endblock %}
