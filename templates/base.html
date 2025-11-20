@@ -9,6 +9,7 @@
   <h1><a href="{% url 'blog:post_list' %}">Meu Blog</a></h1>
   <nav>
     <a href="{% url 'blog:post_create' %}">Criar post</a>
+    <a href="{% url 'blog:category_list' %}">Categorias</a>
     {% if request.user.is_authenticated %}
       | Logado como {{ request.user.username }}
       | <a href="{% url 'logout' %}?next={% url 'blog:post_list' %}">Sair</a>

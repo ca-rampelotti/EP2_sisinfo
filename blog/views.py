@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import PostForm
 
 class PostListView(ListView):
@@ -55,3 +55,13 @@ def comment_create(request, pk):
         return redirect('blog:post_detail', pk=post.pk)
 
     return render(request, 'blog/comment_form.html', {'post': post})
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'blog/category_list.html'
+    context_object_name = 'categories'
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'blog/category_detail.html'
+    context_object_name = 'category'
