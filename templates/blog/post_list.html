@@ -1,15 +1,29 @@
 {% extends "base.html" %}
-{% block title %}Lista de posts{% endblock %}
+{% block title %}
+    {% if category %}
+        Posts em {{ category.name }}
+    {% else %}
+        Lista de posts
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-<h2>Posts</h2>
-<ul>
-  {% for p in posts %}
-    <li>
-      <a href="{% url 'blog:post_detail' p.pk %}">{{ p.title }}</a>
-      — <small>{{ p.created_at|date:"SHORT_DATETIME_FORMAT" }}</small>
-    </li>
-  {% empty %}
-    <li>Sem posts.</li>
-  {% endfor %}
-</ul>
+    <h2>
+        {% if category %}
+            Categoria: {{ category.name }} <small>({{ category.description }})</small>
+        {% else %}
+            Posts
+        {% endif %}
+    </h2>
+
+    <ul>
+      {% for p in posts %}
+        <li>
+          <a href="{% url 'blog:post_detail' p.pk %}">{{ p.title }}</a>
+          — <small>{{ p.created_at|date:"SHORT_DATETIME_FORMAT" }}</small>
+        </li>
+      {% empty %}
+        <li>Sem posts.</li>
+      {% endfor %}
+    </ul>
 {% endblock %}
